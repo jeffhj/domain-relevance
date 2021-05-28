@@ -1,0 +1,8 @@
+torch==1.7.1
+numpy==1.17.2
+tqdm==4.48.2
+torch_geometric==1.6.3
+gensim==3.8.3
+torch_sparse==0.6.8
+nltk==3.4.5
+scikit_learn==0.24.1
