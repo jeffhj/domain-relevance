@@ -22,7 +22,7 @@ To install *torch_geometric*, please follow the instruction on [pytorch_geometri
 
 ## Reproduction
 
-> To produce results in the paper (using word2vec embeddings)
+> To reproduce the results in the paper (using word2vec embeddings)
 
 
 
