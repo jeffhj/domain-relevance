@@ -165,9 +165,6 @@ def main(args):
                     best_valid_ap, best_test_ap = valid_ap, test_ap
                     best_ap_epoch = epoch
                     
-            y_scores = predict_mlp(model, X, split_idx, split_y)
-            y_scores = y_scores.cpu().numpy()                    
-
         elif args.method=="mc":
             model = MC(num_features, args.hidden_channels, args.num_classes, args.num_layers, args.dropout).to(device)
             model.reset_parameters()
@@ -208,7 +205,7 @@ def main(args):
                     best_valid_ap, best_test_ap = valid_ap, test_ap
                     best_ap_epoch = epoch
                     
-            y_scores = predict_cfl(model, X, A, split_idx, split_y)
+            y_scores = predict_cfl(model, X, A)
             y_scores = y_scores.cpu().numpy()
         
         elif args.method=="hicfl":
@@ -231,7 +228,7 @@ def main(args):
                     best_valid_ap, best_test_ap = valid_ap, test_ap
                     best_ap_epoch = epoch
                     
-            y_scores = predict_hicfl(model, X, A, split_idx, split_y, args.alpha)
+            y_scores = predict_hicfl(model, X, A, args.alpha)
             y_scores = y_scores.cpu().numpy()
             
         print("ROC-AUC:", "%.3f"%np.mean(best_test_auc), end="; ")

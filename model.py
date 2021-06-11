@@ -72,7 +72,7 @@ def test_cfl(model, X, A, split_idx, split_y):
     return aucs, aps
 
 @torch.no_grad()
-def predict_cfl(model, X, A, split_idx, split_y):
+def predict_cfl(model, X, A):
     model.eval()
 
     out = model(X, A)
@@ -230,7 +230,7 @@ def test_hicfl(model, X, A, split_idx, split_y, alpha=0.5):
     return aucs, aps
 
 @torch.no_grad()
-def predict_hicfl(model, X, A, split_idx, split_y, alpha=0.5):
+def predict_hicfl(model, X, A, alpha=0.5):
     model.eval()
 
     og, ol = model(X, A)
@@ -241,7 +241,7 @@ def predict_hicfl(model, X, A, split_idx, split_y, alpha=0.5):
         y_ol *= y_
     
     y_og = F.softmax(og,dim=1)[:,1]
-    y_scores = 0.5*y_og + (1-alpha)*y_ol
+    y_scores = alpha*y_og + (1-alpha)*y_ol
     
     return y_scores
 
@@ -328,7 +328,7 @@ def test_mlp(model, X, split_idx, split_y):
     return aucs, aps
 
 @torch.no_grad()
-def predict_mlp(model, X, split_idx, split_y):
+def predict_mlp(model, X):
     model.eval()
 
     out = model(X)
